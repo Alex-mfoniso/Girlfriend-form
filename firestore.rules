@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if the requester is the authorized administrator
+    function isAdmin() {
+      return request.auth != null && (
+        request.auth.token.email == "alexandermfoniso18@gmail.com"
+      );
+    }
+
+    // Applications collection
+    match /applications/{applicationId} {
+      // Anyone (public candidates) can submit a new application
+      allow create: if request.resource.data.fullName is string
+                    && request.resource.data.fullName.size() > 0;
+
+      // Only the authorized administrator can read applications (list and get individual)
+      allow read: if isAdmin();
+
+      // Only the authorized administrator can update status, stage, or notes
+      allow update: if isAdmin();
+
+      // Only the authorized administrator can delete an application
+      allow delete: if isAdmin();
+    }
+
+    // Configuration / Admin settings collection
+    match /settings/{document=**} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

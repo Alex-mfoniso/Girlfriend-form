@@ -1,0 +1,6 @@
+{
+  "name": "Girlfriend Applications",
+  "description": "A humorous, premium recruitment-style website to apply for the position of Alexander's Girlfriend, complete with admin candidate management and Firestore persistence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

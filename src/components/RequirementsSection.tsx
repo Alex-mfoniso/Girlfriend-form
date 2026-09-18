@@ -1,0 +1,9 @@
+import React from 'react';
+const requirements = ['Good communication','Emotional maturity','Sense of humor','Excellent vibes','Can communicate when something is wrong','Can tolerate nonsense','Can handle an engineer who over-engineers everything','Knows how to have fun'];
+const process = ['Application','Screening','Vibe check','Interview','Decision'];
+export const RequirementsSection: React.FC = () => <>
+  <section id="requirements" className="mx-auto max-w-7xl px-5 py-24 sm:px-8 md:py-32">
+    <div className="grid gap-12 md:grid-cols-12"><div className="md:col-span-5"><p className="text-[11px] font-semibold tracking-[.18em] text-[#a83328]">THE BRIEF</p><h2 className="mt-5 text-4xl tracking-[-.045em] sm:text-6xl">Before you <em className="font-editorial">apply.</em></h2><p className="mt-5 max-w-sm text-sm leading-6 text-[#625d54]">Read the requirements carefully. Management will notice.</p></div><ol className="border-t border-[#d5cec0] md:col-span-7">{requirements.map((item, i) => <li key={item} className="grid grid-cols-[3rem_1fr] border-b border-[#d5cec0] py-5 text-lg sm:text-xl"><span className="font-mono text-xs text-[#a83328]">{String(i + 1).padStart(2,'0')}</span><span>{item}</span></li>)}</ol></div>
+  </section>
+  <section className="bg-[#1b1b19] px-5 py-20 text-[#f5f1e8] sm:px-8"><div className="mx-auto max-w-7xl"><p className="text-[11px] font-semibold tracking-[.18em] text-[#d98170]">THE PROCESS</p><h2 className="mt-4 text-3xl tracking-[-.04em] sm:text-5xl">A reasonably serious selection process.</h2><div className="mt-16 grid border-t border-[#504d47] md:grid-cols-5">{process.map((item,i) => <div key={item} className="border-b border-[#504d47] py-6 md:border-b-0 md:border-r md:px-5 md:first:pl-0"><p className="font-mono text-xs text-[#d98170]">0{i+1}</p><p className="mt-8 text-lg">{item}</p></div>)}</div></div></section>
+</>;

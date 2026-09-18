@@ -1,0 +1,74 @@
+import { initializeApp, getApps, getApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+import appletConfig from '../../firebase-applet-config.json';
+
+// Build the Firebase configuration with fallback to the provisioned applet configuration
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || appletConfig.apiKey,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || appletConfig.authDomain,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || appletConfig.projectId,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || appletConfig.storageBucket,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || appletConfig.messagingSenderId,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || appletConfig.appId,
+};
+
+// Database ID (either custom Firestore database or default '(default)')
+export const FIRESTORE_DATABASE_ID =
+  import.meta.env.VITE_FIREBASE_FIRESTORE_DATABASE_ID ||
+  appletConfig.firestoreDatabaseId ||
+  '(default)';
+
+// Initialize Firebase App
+export const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+
+// Initialize Firebase Auth
+export const auth = getAuth(app);
+export const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({
+  prompt: 'select_account',
+});
+
+// Initialize Cloud Firestore using the designated database
+export const db = FIRESTORE_DATABASE_ID && FIRESTORE_DATABASE_ID !== '(default)'
+  ? getFirestore(app, FIRESTORE_DATABASE_ID)
+  : getFirestore(app);
+
+// Admin Configuration
+export const DEFAULT_ADMIN_EMAIL =
+  import.meta.env.VITE_ADMIN_EMAIL || 'alexandermfoniso18@gmail.com';
+
+export function getAuthorizedAdminEmails(): string[] {
+  const envEmail = (import.meta.env.VITE_ADMIN_EMAIL as string | undefined)?.toLowerCase().trim();
+  const storedEmails = localStorage.getItem('girlfriend_app_admin_emails');
+  
+  const emails = new Set<string>();
+  if (DEFAULT_ADMIN_EMAIL) emails.add(DEFAULT_ADMIN_EMAIL.toLowerCase().trim());
+  if (envEmail) emails.add(envEmail);
+  
+  if (storedEmails) {
+    try {
+      const parsed = JSON.parse(storedEmails);
+      if (Array.isArray(parsed)) {
+        parsed.forEach((e) => {
+          if (typeof e === 'string' && e.trim()) {
+            emails.add(e.toLowerCase().trim());
+          }
+        });
+      }
+    } catch {
+      // ignore parsing error
+    }
+  }
+
+  return Array.from(emails);
+}
+
+export function addAuthorizedAdminEmail(email: string): void {
+  const current = getAuthorizedAdminEmails();
+  const normalized = email.toLowerCase().trim();
+  if (!current.includes(normalized)) {
+    const updated = [...current, normalized];
+    localStorage.setItem('girlfriend_app_admin_emails', JSON.stringify(updated));
+  }
+}

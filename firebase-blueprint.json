@@ -1,0 +1,43 @@
+{
+  "entities": {
+    "Application": {
+      "title": "Application",
+      "description": "Candidate application for the Girlfriend position",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "fullName": { "type": "string" },
+        "preferredName": { "type": "string" },
+        "age": { "type": "number" },
+        "location": { "type": "string" },
+        "instagram": { "type": "string" },
+        "phone": { "type": "string" },
+        "personality": { "type": "string" },
+        "communicationStyle": { "type": "string" },
+        "loveLanguage": { "type": "string" },
+        "personalityTraits": { "type": "array", "items": { "type": "string" } },
+        "disagreementStyle": { "type": "string" },
+        "communicationFrequency": { "type": "string" },
+        "idealDate": { "type": "string" },
+        "jealousyLevel": { "type": "number" },
+        "whySelected": { "type": "string" },
+        "relationshipValue": { "type": "string" },
+        "somethingToKnow": { "type": "string" },
+        "greenFlag": { "type": "string" },
+        "redFlag": { "type": "string" },
+        "compatibilityScore": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "interview", "selected", "rejected"] },
+        "currentStage": { "type": "string", "enum": ["application_submitted", "initial_screening", "compatibility_assessment", "vibe_check", "final_interview", "decision"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["fullName", "age", "location", "compatibilityScore", "status", "currentStage"]
+    }
+  },
+  "firestore": {
+    "/applications/{applicationId}": {
+      "schema": "Application",
+      "description": "Public candidate submissions, accessible and manageable only by administrator"
+    }
+  }
+}
