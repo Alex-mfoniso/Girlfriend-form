@@ -45,6 +45,24 @@ button { cursor: pointer; }
 .application-sheet textarea,.application-sheet input[type="text"] { font-size:16px!important; padding:14px 0!important; }
 .application-sheet button[type="submit"] { background:#171716!important; border-radius:0!important; padding:14px 22px!important; box-shadow:none!important; }
 .application-sheet button[type="submit"]:hover { background:#b53c2e!important; }
+.personality-step { padding-top:8px; }
+.personality-step-intro { padding:0 0 28px!important; border-color:#d5cec0!important; }
+.personality-step-intro h3 { margin-top:12px; font-family:'Playfair Display',Georgia,serif; font-size:38px!important; font-weight:500!important; letter-spacing:-.04em; }
+.personality-step-intro p { margin-top:7px; font-size:14px!important; }
+.personality-archetypes,.personality-love,.personality-traits,.personality-communication { padding-top:18px; }
+.personality-step label { display:block; margin-bottom:14px; color:#171716!important; font-size:15px!important; font-weight:600!important; }
+.personality-archetypes > div { display:grid!important; grid-template-columns:1fr!important; gap:0!important; border-top:1px solid #d5cec0; }
+.personality-archetypes button,.personality-love button,.personality-traits button { display:grid!important; grid-template-columns:48px 1fr; align-items:center; min-height:58px; padding:12px 0!important; border:0!important; border-bottom:1px solid #d5cec0!important; border-radius:0!important; background:transparent!important; color:#403d37!important; font-size:14px!important; box-shadow:none!important; }
+.personality-archetypes button:hover,.personality-love button:hover,.personality-traits button:hover { transform:none!important; background:rgba(181,60,46,.05)!important; color:#171716!important; }
+.personality-archetypes button.bg-rose-500\/15,.personality-love button.bg-pink-500\/20,.personality-traits button.bg-rose-500 { background:rgba(181,60,46,.09)!important; color:#171716!important; }
+.choice-number { color:#a83328; font-family:'DM Mono',monospace; font-size:11px; }
+.personality-love > div { display:grid!important; grid-template-columns:1fr 1fr; gap:0!important; border-top:1px solid #d5cec0; }
+.personality-love button { text-align:left!important; }.personality-love button:nth-child(odd) { border-right:1px solid #d5cec0!important; padding-right:16px!important; }.personality-love button:nth-child(even) { padding-left:16px!important; }
+.personality-traits > div:last-of-type { display:grid!important; grid-template-columns:1fr 1fr; gap:0!important; border-top:1px solid #d5cec0; }
+.personality-traits button { text-align:left!important; }.personality-traits button:nth-child(odd) { border-right:1px solid #d5cec0!important; padding-right:14px!important; }.personality-traits button:nth-child(even) { padding-left:14px!important; }
+.personality-traits > div:first-child > span { color:#a83328!important; font-family:'DM Mono',monospace; }
+.personality-communication { border-top:1px solid #d5cec0; margin-top:20px!important; }.personality-communication input { border:0!important; border-bottom:1px solid #171716!important; padding:14px 0!important; }
+@media (max-width:640px) { .personality-step-intro h3 { font-size:32px!important; }.personality-love > div,.personality-traits > div:last-of-type { grid-template-columns:1fr!important; }.personality-love button:nth-child(odd),.personality-traits button:nth-child(odd) { border-right:0!important; padding-right:0!important; }.personality-love button:nth-child(even),.personality-traits button:nth-child(even) { padding-left:0!important; } }
 .application-receipt { max-width:860px!important; padding-top:96px!important; padding-bottom:96px!important; }
 .receipt-processing,.receipt-confirmation { border:1px solid #d5cec0!important; background:transparent!important; border-radius:0!important; box-shadow:none!important; }
 .receipt-processing > .relative { display:none!important; }

@@ -353,7 +353,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
-                className="space-y-6"
+                className="personality-step space-y-6"
               >
                 <div className="border-b border-white/10 pb-3">
                   <h3 className="text-lg font-bold text-white flex items-center gap-2">
@@ -485,23 +485,19 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
                 transition={{ duration: 0.3 }}
                 className="space-y-6"
               >
-                <div className="border-b border-white/10 pb-3">
-                  <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                    <span className="text-rose-400 font-mono text-sm">02.</span>
-                    Personality & Emotional Cadence
-                  </h3>
-                  <p className="text-xs text-slate-400">
-                    Determines psychological synergy and daily energy alignment.
-                  </p>
+                <div className="personality-step-intro border-b border-white/10 pb-3">
+                  <span className="text-rose-400 font-mono text-sm">02 / 05 · PERSONALITY</span>
+                  <h3 className="text-lg font-bold text-white">Let's talk about you.</h3>
+                  <p className="text-xs text-slate-400">Choose what feels closest. Nothing here needs to be a performance.</p>
                 </div>
 
                 {/* Personality Type */}
-                <div className="space-y-2">
+                <div className="personality-archetypes space-y-2">
                   <label className="text-xs font-semibold text-slate-300">
-                    Dominant Personality Archetype
+                    Which description feels most like you?
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {PERSONALITY_TYPES.map((type) => (
+                    {PERSONALITY_TYPES.map((type, index) => (
                       <button
                         type="button"
                         key={type}
@@ -512,19 +508,19 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
                             : 'bg-white/[0.02] border-white/5 text-slate-400 hover:border-white/20 hover:text-white'
                         }`}
                       >
-                        {type}
+                        <span className="choice-number">0{index + 1}</span><span>{type}</span>
                       </button>
                     ))}
                   </div>
                 </div>
 
                 {/* Love Language */}
-                <div className="space-y-2">
+                <div className="personality-love space-y-2">
                   <label className="text-xs font-semibold text-slate-300">
-                    Primary Love Language
+                    How do you usually show care?
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                    {LOVE_LANGUAGES.map((lang) => (
+                    {LOVE_LANGUAGES.map((lang, index) => (
                       <button
                         type="button"
                         key={lang}
@@ -535,24 +531,24 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
                             : 'bg-white/[0.02] border-white/5 text-slate-400 hover:border-white/20 hover:text-white'
                         }`}
                       >
-                        {lang}
+                        <span className="choice-number">0{index + 1}</span><span>{lang}</span>
                       </button>
                     ))}
                   </div>
                 </div>
 
                 {/* Personality Traits (Multi-select) */}
-                <div className="space-y-2">
+                <div className="personality-traits space-y-2">
                   <div className="flex items-center justify-between">
                     <label className="text-xs font-semibold text-slate-300">
-                      Personality Traits (Select up to 5)
+                      Pick up to five things that sound like you
                     </label>
                     <span className="text-[11px] text-rose-400">
                       {formData.personalityTraits?.length || 0} / 5 selected
                     </span>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {TRAIT_OPTIONS.map((trait) => {
+                    {TRAIT_OPTIONS.map((trait, index) => {
                       const selected = formData.personalityTraits?.includes(trait);
                       return (
                         <button
@@ -565,7 +561,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
                               : 'bg-white/[0.03] border-white/10 text-slate-400 hover:border-white/20 hover:text-slate-200'
                           }`}
                         >
-                          {trait}
+                          <span className="choice-number">{String(index + 1).padStart(2, '0')}</span><span>{trait}</span>
                         </button>
                       );
                     })}
@@ -576,9 +572,9 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
                 </div>
 
                 {/* Communication Style text input */}
-                <div className="space-y-1.5">
+                <div className="personality-communication space-y-1.5">
                   <label className="text-xs font-semibold text-slate-300">
-                    Preferred Communication Style
+                    How do you usually communicate with someone you like?
                   </label>
                   <input
                     type="text"
