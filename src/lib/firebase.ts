@@ -14,10 +14,14 @@ const firebaseConfig = {
 };
 
 // Database ID (either custom Firestore database or default '(default)')
+const configuredFirestoreDatabaseId = import.meta.env.VITE_FIREBASE_FIRESTORE_DATABASE_ID?.trim();
+
+// A Firestore database ID is normally '(default)' or a deliberately-created database name.
+// Google Analytics measurement IDs begin with G- and must never be passed to getFirestore.
 export const FIRESTORE_DATABASE_ID =
-  import.meta.env.VITE_FIREBASE_FIRESTORE_DATABASE_ID ||
-  appletConfig.firestoreDatabaseId ||
-  '(default)';
+  configuredFirestoreDatabaseId && !/^G-[A-Z0-9]+$/i.test(configuredFirestoreDatabaseId)
+    ? configuredFirestoreDatabaseId
+    : '(default)';
 
 // Initialize Firebase App
 export const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
