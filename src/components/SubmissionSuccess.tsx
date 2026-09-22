@@ -8,7 +8,6 @@ import {
   Check,
   Share2,
   ArrowRight,
-  ShieldCheck,
   Sparkles,
   FileText,
 } from 'lucide-react';
@@ -18,13 +17,11 @@ import { calculateCompatibilityScore } from '../utils/compatibility';
 interface SubmissionSuccessProps {
   application: GirlfriendApplication;
   onReset: () => void;
-  onGoToAdmin?: () => void;
 }
 
 export const SubmissionSuccess: React.FC<SubmissionSuccessProps> = ({
   application,
   onReset,
-  onGoToAdmin,
 }) => {
   const [processingStage, setProcessingStage] = useState<number>(0);
   const [copied, setCopied] = useState(false);
@@ -246,15 +243,6 @@ export const SubmissionSuccess: React.FC<SubmissionSuccessProps> = ({
               Submit Another Application
             </button>
 
-            {onGoToAdmin && (
-              <button
-                onClick={onGoToAdmin}
-                className="receipt-admin-link w-full sm:w-1/2 py-3 px-4 font-semibold text-sm flex items-center justify-center gap-2"
-              >
-                <ShieldCheck className="w-4 h-4 text-rose-400" />
-                <span>Alexander's Review CMS</span>
-              </button>
-            )}
           </div>
         </motion.div>
       )}

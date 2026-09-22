@@ -3,12 +3,9 @@ import { HeroSection } from '../components/HeroSection';
 import { RequirementsSection } from '../components/RequirementsSection';
 import { ApplicationForm } from '../components/ApplicationForm';
 import { SubmissionSuccess } from '../components/SubmissionSuccess';
-import { useNavigation } from '../context/NavigationContext';
 import type { GirlfriendApplication } from '../types/application';
-import { Heart, ShieldCheck, Sparkles } from 'lucide-react';
 
 export const LandingPage: React.FC = () => {
-  const { navigate } = useNavigation();
   const [submittedApplication, setSubmittedApplication] = useState<GirlfriendApplication | null>(null);
 
   const handleApplyClick = () => {
@@ -38,7 +35,6 @@ export const LandingPage: React.FC = () => {
           <SubmissionSuccess
             application={submittedApplication}
             onReset={() => setSubmittedApplication(null)}
-            onGoToAdmin={() => navigate('admin')}
           />
         ) : (
           <ApplicationForm
@@ -67,17 +63,7 @@ export const LandingPage: React.FC = () => {
             <p className="text-slate-400">
               All applications safely stored in Google Cloud Firestore.
             </p>
-            <div className="flex items-center justify-center sm:justify-end gap-3 text-[11px]">
-              <button
-                onClick={() => navigate('admin')}
-                className="text-rose-400 hover:text-rose-300 font-medium inline-flex items-center gap-1"
-              >
-                <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Alexander's Admin Login</span>
-              </button>
-              <span>•</span>
-              <span className="text-slate-500">Strict Non-Ghosting Protocol</span>
-            </div>
+            <p className="text-[11px] text-slate-500">Strict Non-Ghosting Protocol</p>
           </div>
         </div>
       </footer>
