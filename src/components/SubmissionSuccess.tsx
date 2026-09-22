@@ -238,7 +238,7 @@ export const SubmissionSuccess: React.FC<SubmissionSuccessProps> = ({
           <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
             <button
               onClick={onReset}
-              className="w-full sm:w-1/2 py-3 px-4 rounded-xl font-semibold text-sm text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors text-center"
+              className="receipt-another w-full sm:w-1/2 py-3 px-4 font-semibold text-sm text-center"
             >
               Submit Another Application
             </button>
