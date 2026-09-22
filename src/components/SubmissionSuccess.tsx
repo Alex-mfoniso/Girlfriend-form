@@ -82,14 +82,14 @@ export const SubmissionSuccess: React.FC<SubmissionSuccessProps> = ({
   };
 
   return (
-    <div className="max-w-2xl mx-auto py-8 px-4 sm:px-6">
+    <div className="application-receipt max-w-2xl mx-auto py-8 px-4 sm:px-6">
       {!isCompleted ? (
         // Animated Processing Screen
         <motion.div
           key="processing"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="rounded-3xl glass-card border border-white/10 p-8 sm:p-10 shadow-2xl text-center space-y-8"
+          className="receipt-processing rounded-3xl glass-card border border-white/10 p-8 sm:p-10 shadow-2xl text-center space-y-8"
         >
           <div className="relative mx-auto w-20 h-20">
             <div className="absolute inset-0 rounded-full border-4 border-rose-500/20 animate-pulse" />
@@ -145,7 +145,7 @@ export const SubmissionSuccess: React.FC<SubmissionSuccessProps> = ({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="rounded-3xl glass-card border border-white/10 p-7 sm:p-10 shadow-2xl space-y-8 relative overflow-hidden"
+          className="receipt-confirmation rounded-3xl glass-card border border-white/10 p-7 sm:p-10 shadow-2xl space-y-8 relative overflow-hidden"
         >
           {/* Subtle decorative banner */}
           <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-rose-500 via-pink-500 to-amber-400" />

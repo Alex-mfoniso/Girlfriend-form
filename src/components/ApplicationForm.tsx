@@ -270,9 +270,9 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
   const currentCompatibility = calculateCompatibilityScore(formData);
 
   return (
-    <section id="application-form" className="py-16 md:py-24 max-w-4xl mx-auto px-4 sm:px-6">
+    <section id="application-form" className="editorial-application py-16 md:py-24 max-w-4xl mx-auto px-4 sm:px-6">
       {/* Form Container Card */}
-      <div className="rounded-3xl glass-card border border-white/10 shadow-2xl p-6 sm:p-10 relative overflow-hidden">
+      <div className="application-sheet rounded-3xl glass-card border border-white/10 shadow-2xl p-6 sm:p-10 relative overflow-hidden">
         {/* Subtle top glow bar */}
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-rose-500 via-pink-500 to-amber-400" />
 
