@@ -324,9 +324,9 @@ export const AdminPage: React.FC = () => {
 
   // 4. Authorized Admin Candidate Management System
   return (
-    <div className="min-h-screen pb-20">
+    <div className="admin-dashboard min-h-screen pb-20">
       {/* Top Header Bar */}
-      <div className="border-b border-white/10 bg-[#090d16]/90 backdrop-blur-xl sticky top-18 z-30">
+      <div className="admin-dashboard-header border-b border-white/10 bg-[#090d16]/90 backdrop-blur-xl sticky top-18 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-rose-600 via-pink-600 to-amber-500 p-0.5 shadow-lg shadow-rose-500/20">
@@ -384,7 +384,7 @@ export const AdminPage: React.FC = () => {
         )}
 
         {/* Dashboard Metric Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+        <div className="admin-stat-strip grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
           {/* Total */}
           <div className="p-4 sm:p-5 rounded-2xl glass-card border border-white/5 space-y-1">
             <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
@@ -432,7 +432,7 @@ export const AdminPage: React.FC = () => {
         </div>
 
         {/* Search, Filters, and Sort Controls */}
-        <div className="p-4 rounded-2xl glass-card border border-white/10 space-y-4">
+        <div className="admin-controls p-4 rounded-2xl glass-card border border-white/10 space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">
             {/* Search Input */}
             <div className="sm:col-span-5 relative">
@@ -551,7 +551,7 @@ export const AdminPage: React.FC = () => {
         ) : (
           <>
             {/* Desktop Table View */}
-            <div className="hidden lg:block rounded-2xl glass-card border border-white/10 overflow-hidden shadow-xl">
+            <div className="admin-table-shell hidden lg:block rounded-2xl glass-card border border-white/10 overflow-hidden shadow-xl">
               <table className="w-full text-left text-xs border-collapse">
                 <thead>
                   <tr className="border-b border-white/10 bg-[#0c1220] text-slate-400 uppercase tracking-wider font-semibold">
@@ -671,7 +671,7 @@ export const AdminPage: React.FC = () => {
             </div>
 
             {/* Mobile / Tablet Responsive Cards View */}
-            <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="admin-candidate-list lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
               {filteredApplications.map((app) => {
                 const statusCfg = STATUS_CONFIG[app.status] || STATUS_CONFIG.pending;
                 const stageCfg = STAGE_CONFIG[app.currentStage] || STAGE_CONFIG.application_submitted;

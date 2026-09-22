@@ -128,7 +128,7 @@ export const CandidateModal: React.FC<CandidateModalProps> = ({
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        className="w-full max-w-3xl rounded-3xl glass-card border border-white/10 shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col"
+        className="candidate-dossier w-full max-w-3xl rounded-3xl glass-card border border-white/10 shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col"
       >
         {/* Modal Top Header */}
         <div className="p-6 border-b border-white/10 bg-[#0d1322] flex items-start justify-between gap-4">

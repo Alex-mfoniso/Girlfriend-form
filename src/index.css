@@ -36,3 +36,35 @@ button { cursor: pointer; }
 .admin-shell .glass-card, .admin-shell .glass-panel { background: transparent !important; border-color: #3a3935 !important; backdrop-filter: none !important; box-shadow: none !important; }
 .admin-shell .glass-input { background: #20201e !important; border-color: #494740 !important; color: #eee9df !important; border-radius: 0 !important; }
 .admin-shell .rounded-3xl, .admin-shell .rounded-2xl, .admin-shell .rounded-xl, .admin-shell .rounded-lg { border-radius: 2px !important; }
+.admin-dashboard { background:#181817; color:#eee9df; }
+.admin-dashboard-header { background:#181817!important; border-color:#3a3935!important; }
+.admin-dashboard-header h1 { font-family:'Playfair Display', Georgia, serif; font-weight:500!important; letter-spacing:-.03em!important; }
+.admin-dashboard .text-white { color:#eee9df!important; }
+.admin-dashboard .text-slate-200,.admin-dashboard .text-slate-300 { color:#c9c2b7!important; }
+.admin-dashboard .text-slate-400,.admin-dashboard .text-slate-500 { color:#918a7f!important; }
+.admin-dashboard .text-rose-300,.admin-dashboard .text-rose-400,.admin-dashboard .text-rose-500 { color:#d98170!important; }
+.admin-dashboard .bg-\[\#090d16\],.admin-dashboard .bg-\[\#0c1220\],.admin-dashboard .bg-\[\#0d1322\] { background:#181817!important; }
+.admin-dashboard .bg-gradient-to-r,.admin-dashboard .bg-gradient-to-tr { background:#b53c2e!important; }
+.admin-stat-strip { gap:0!important; border-top:1px solid #3a3935; border-bottom:1px solid #3a3935; }
+.admin-stat-strip > div { min-height:110px; padding:20px!important; border:0!important; border-right:1px solid #3a3935!important; background:transparent!important; }
+.admin-stat-strip > div:last-child { border-right:0!important; }
+.admin-stat-strip > div span:first-child { color:#918a7f!important; font-family:'DM Mono',monospace; font-size:10px!important; letter-spacing:.12em!important; }
+.admin-stat-strip > div > div { font-family:'Playfair Display',Georgia,serif; font-size:38px!important; font-weight:500!important; line-height:1!important; margin-top:14px!important; }
+.admin-stat-strip > div > span:last-child { display:none; }
+.admin-controls { padding:0!important; border:0!important; background:transparent!important; }
+.admin-controls > div:first-child { display:grid; grid-template-columns:minmax(0,2fr) minmax(130px,1fr) minmax(130px,1fr) minmax(130px,1fr); gap:1px!important; background:#3a3935; border:1px solid #3a3935; }
+.admin-controls input,.admin-controls select { height:48px; border:0!important; background:#232321!important; border-radius:0!important; }
+.admin-controls > div:last-child { padding:10px 0 0!important; }
+.admin-table-shell { border:1px solid #3a3935!important; border-radius:0!important; background:transparent!important; }
+.admin-table-shell thead tr { background:#232321!important; border-color:#3a3935!important; }
+.admin-table-shell th { padding-top:15px!important; padding-bottom:15px!important; font-family:'DM Mono',monospace; font-size:10px!important; letter-spacing:.1em; color:#918a7f!important; }
+.admin-table-shell tbody tr { border-color:#30302d!important; }.admin-table-shell tbody tr:hover { background:#232321!important; }
+.admin-table-shell td { padding-top:17px!important; padding-bottom:17px!important; }
+.admin-table-shell td:first-child > div > div:first-child { border-radius:50%!important; background:#b53c2e!important; }
+.admin-candidate-list > div { border-color:#3a3935!important; background:transparent!important; border-radius:0!important; box-shadow:none!important; }
+.admin-candidate-list > div > div:first-child > div:first-child > div:first-child { border-radius:50%!important; background:#b53c2e!important; }
+.candidate-dossier { border-radius:0!important; background:#1c1c1a!important; border-color:#4a4740!important; }
+.candidate-dossier > div:first-child,.candidate-dossier > div:nth-child(2),.candidate-dossier > div:last-child { background:#1c1c1a!important; border-color:#3a3935!important; }
+.candidate-dossier h3 { font-family:'Playfair Display',Georgia,serif; font-size:30px!important; font-weight:500!important; }
+.candidate-dossier .rounded-xl,.candidate-dossier .rounded-2xl { border-radius:0!important; }
+@media (max-width: 1023px) { .admin-stat-strip > div:nth-child(2) { border-right:0!important; } .admin-controls > div:first-child { grid-template-columns:1fr!important; } }
