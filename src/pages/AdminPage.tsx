@@ -43,13 +43,17 @@ import { AdminSettingsModal } from '../components/AdminSettingsModal';
 import { DEFAULT_ADMIN_EMAIL } from '../lib/firebase';
 
 export const AdminPage: React.FC = () => {
-  const { user, loading: authLoading, isAdmin, loginWithGoogle, logout, error: authError, clearError } = useAuth();
+  const { user, loading: authLoading, isAdmin, signInWithPassword, sendAdminPasswordReset, logout } = useAuth();
   const { navigate } = useNavigation();
   const { showToast } = useToast();
 
   const [applications, setApplications] = useState<GirlfriendApplication[]>([]);
   const [loadingData, setLoadingData] = useState(true);
   const [firestoreError, setFirestoreError] = useState<string | null>(null);
+  const [adminPassword, setAdminPassword] = useState('');
+  const [loginError, setLoginError] = useState<string | null>(null);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [resetMessage, setResetMessage] = useState<string | null>(null);
 
   // Filters and search
   const [searchQuery, setSearchQuery] = useState('');
@@ -64,6 +68,32 @@ export const AdminPage: React.FC = () => {
   // Track initial load vs real-time new incoming applicant
   const initialLoadDone = useRef(false);
   const previousAppCount = useRef(0);
+
+  const handlePasswordLogin = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!adminPassword) return;
+    setLoginError(null);
+    setIsLoggingIn(true);
+    try {
+      await signInWithPassword(adminPassword);
+      setAdminPassword('');
+    } catch (error: any) {
+      setLoginError(error?.message || 'Unable to sign in. Check the password and try again.');
+    } finally {
+      setIsLoggingIn(false);
+    }
+  };
+
+  const handlePasswordReset = async () => {
+    setLoginError(null);
+    setResetMessage(null);
+    try {
+      await sendAdminPasswordReset();
+      setResetMessage(`Password reset email sent to ${DEFAULT_ADMIN_EMAIL}.`);
+    } catch (error: any) {
+      setLoginError(error?.message || 'Unable to send a password reset email.');
+    }
+  };
 
   // Real-time Firestore subscription when authenticated and authorized
   useEffect(() => {
@@ -199,36 +229,38 @@ export const AdminPage: React.FC = () => {
           </div>
 
           <p className="text-xs text-slate-400 leading-relaxed max-w-sm mx-auto">
-            This dashboard contains sensitive candidate dossiers and relationship recruitment metrics. Please authenticate with your authorized Google Account.
+            This dashboard contains sensitive candidate dossiers and relationship recruitment metrics. Password access is restricted to the configured administrator.
           </p>
 
-          {authError && (
+          {loginError && (
             <div className="p-3 rounded-xl bg-rose-950/40 border border-rose-500/30 text-rose-200 text-xs flex items-center justify-between">
-              <span>{authError}</span>
-              <button onClick={clearError} className="text-rose-400 hover:text-white">
+              <span>{loginError}</span>
+              <button onClick={() => setLoginError(null)} className="text-rose-400 hover:text-white">
                 <X className="w-3.5 h-3.5" />
               </button>
             </div>
           )}
 
-          <div className="pt-2 space-y-3">
-            <button
-              onClick={loginWithGoogle}
-              className="w-full py-3.5 px-4 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-rose-600 via-rose-500 to-pink-500 hover:from-rose-500 hover:to-pink-400 shadow-lg shadow-rose-600/30 transition-all flex items-center justify-center gap-3 active:scale-[0.98]"
-            >
-              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" />
-              </svg>
-              <span>Continue with Google</span>
+          {resetMessage && <p className="text-xs text-emerald-300">{resetMessage}</p>}
+
+          <form onSubmit={handlePasswordLogin} className="pt-2 space-y-3">
+            <label className="block text-left text-xs font-medium text-slate-300" htmlFor="admin-password">Admin password</label>
+            <input id="admin-password" type="password" autoComplete="current-password" value={adminPassword} onChange={(e) => setAdminPassword(e.target.value)} className="w-full rounded-xl glass-input px-4 py-3 text-sm" placeholder="Enter password" required />
+            <button type="submit" disabled={isLoggingIn} className="w-full py-3.5 px-4 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-rose-600 via-rose-500 to-pink-500 disabled:opacity-60 transition-all">
+              {isLoggingIn ? 'Signing in…' : 'Continue'}
+            </button>
+            <button type="button" onClick={handlePasswordReset} className="w-full text-xs text-rose-300 hover:text-white transition-colors">
+              Forgot password? Send a reset email
             </button>
 
             <button
+              type="button"
               onClick={() => navigate('home')}
               className="text-xs text-slate-400 hover:text-slate-200 transition-colors"
             >
               ← Return to public candidate application
             </button>
-          </div>
+          </form>
         </motion.div>
       </div>
     );
@@ -250,7 +282,7 @@ export const AdminPage: React.FC = () => {
           <div className="space-y-2">
             <h2 className="text-3xl font-black text-white tracking-tight">Access Denied</h2>
             <p className="text-sm text-slate-400">
-              The Google Account you authenticated with is not authorized to access Alexander's Candidate Management System.
+              This account is not authorized to access Alexander's Candidate Management System.
             </p>
           </div>
 
@@ -275,7 +307,7 @@ export const AdminPage: React.FC = () => {
               className="flex-1 py-3 px-4 rounded-xl font-semibold text-xs text-white bg-white/10 hover:bg-white/15 border border-white/10 transition-colors flex items-center justify-center gap-2"
             >
               <LogOut className="w-4 h-4" />
-              <span>Switch Google Account</span>
+              <span>Sign out</span>
             </button>
 
             <button

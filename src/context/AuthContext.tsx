@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import type { User } from 'firebase/auth';
-import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { auth } from '../lib/firebase';
 
 const ADMIN_EMAIL = 'alexandermfoniso18@gmail.com';
@@ -10,7 +10,7 @@ type AuthContextValue = {
   loading: boolean;
   isAdmin: boolean;
   signInWithPassword: (password: string) => Promise<void>;
-  signInWithGoogle: () => Promise<void>;
+  sendAdminPasswordReset: () => Promise<void>;
   logout: () => Promise<void>;
 };
 
@@ -34,10 +34,8 @@ export const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
     signInWithPassword: async (password) => {
       await signInWithEmailAndPassword(auth, ADMIN_EMAIL, password);
     },
-    signInWithGoogle: async () => {
-      const password = window.prompt('Enter the admin password');
-      if (!password) throw new Error('A password is required to access the admin portal.');
-      await signInWithEmailAndPassword(auth, ADMIN_EMAIL, password);
+    sendAdminPasswordReset: async () => {
+      await sendPasswordResetEmail(auth, ADMIN_EMAIL);
     },
     logout: async () => {
       await signOut(auth);

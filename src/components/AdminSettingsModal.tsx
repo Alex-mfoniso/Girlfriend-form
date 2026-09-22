@@ -36,7 +36,7 @@ export const AdminSettingsModal: React.FC<AdminSettingsModalProps> = ({ onClose 
     if (!newEmail.trim() || !newEmail.includes('@')) {
       showToast({
         title: 'Invalid Email',
-        message: 'Please provide a valid Google account email address.',
+        message: 'Please provide a valid administrator email address.',
         type: 'error',
       });
       return;
@@ -89,11 +89,11 @@ export const AdminSettingsModal: React.FC<AdminSettingsModalProps> = ({ onClose 
           {/* Authorized Admin Emails Section */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="font-bold text-white text-sm">Authorized Google Accounts</span>
+              <span className="font-bold text-white text-sm">Authorized Administrator Emails</span>
               <span className="text-[11px] text-slate-400">Enforced by Firebase Auth</span>
             </div>
             <p className="text-slate-300 leading-relaxed">
-              Only Google accounts matching these addresses are granted access to Candidate dossiers.
+              Only accounts matching these addresses are granted access to Candidate dossiers.
             </p>
 
             <div className="space-y-2">
@@ -123,7 +123,7 @@ export const AdminSettingsModal: React.FC<AdminSettingsModalProps> = ({ onClose 
             <form onSubmit={handleAddEmail} className="flex gap-2 pt-1">
               <input
                 type="email"
-                placeholder="Add another admin Google account..."
+                placeholder="Add another administrator email..."
                 value={newEmail}
                 onChange={(e) => setNewEmail(e.target.value)}
                 className="flex-1 px-3.5 py-2 rounded-xl glass-input text-xs"
