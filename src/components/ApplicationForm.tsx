@@ -483,7 +483,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
-                className="space-y-6"
+                className="compatibility-step space-y-6"
               >
                 <div className="personality-step-intro border-b border-white/10 pb-3">
                   <span className="text-rose-400 font-mono text-sm">02 / 05 · PERSONALITY</span>
@@ -597,24 +597,20 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
                 transition={{ duration: 0.3 }}
                 className="space-y-6"
               >
-                <div className="border-b border-white/10 pb-3">
-                  <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                    <span className="text-rose-400 font-mono text-sm">03.</span>
-                    Compatibility & Situational Judgement
-                  </h3>
-                  <p className="text-xs text-slate-400">
-                    High-stakes tactical scenarios to gauge relationship resilience.
-                  </p>
+                <div className="compatibility-step-intro border-b border-white/10 pb-3">
+                  <span className="text-rose-400 font-mono text-sm">03 / 05 · COMPATIBILITY</span>
+                  <h3 className="text-lg font-bold text-white">How do you move through a relationship?</h3>
+                  <p className="text-xs text-slate-400">There are no correct answers. We are simply checking the rhythm.</p>
                 </div>
 
                 {/* Question 1: Alexander hasn't replied for 3 hours */}
-                <div className="space-y-2">
+                <div className="compatibility-options space-y-2">
                   <label className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
                     <HelpCircle className="w-3.5 h-3.5 text-rose-400" />
                     "Alexander hasn't replied for 3 hours. What do you do?" *
                   </label>
                   <div className="space-y-2">
-                    {NO_REPLY_REACTIONS.map((option) => (
+                    {NO_REPLY_REACTIONS.map((option, index) => (
                       <button
                         type="button"
                         key={option}
@@ -625,20 +621,20 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
                             : 'bg-white/[0.02] border-white/5 text-slate-400 hover:border-white/20 hover:text-white'
                         }`}
                       >
-                        {option}
+                        <span className="choice-number">0{index + 1}</span><span>{option}</span>
                       </button>
                     ))}
                   </div>
                 </div>
 
                 {/* Question 2: How do you handle disagreements? */}
-                <div className="space-y-2">
+                <div className="compatibility-options space-y-2">
                   <label className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
                     <ShieldAlert className="w-3.5 h-3.5 text-amber-400" />
                     "How do you handle disagreements?" *
                   </label>
                   <div className="space-y-2">
-                    {DISAGREEMENT_STYLES.map((style) => (
+                    {DISAGREEMENT_STYLES.map((style, index) => (
                       <button
                         type="button"
                         key={style}
@@ -649,19 +645,19 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
                             : 'bg-white/[0.02] border-white/5 text-slate-400 hover:border-white/20 hover:text-white'
                         }`}
                       >
-                        {style}
+                        <span className="choice-number">0{index + 1}</span><span>{style}</span>
                       </button>
                     ))}
                   </div>
                 </div>
 
                 {/* Question 3: Talking frequency */}
-                <div className="space-y-2">
+                <div className="compatibility-options space-y-2">
                   <label className="text-xs font-bold text-slate-200">
                     "How often do you like talking to your partner?" *
                   </label>
                   <div className="space-y-2">
-                    {COMMUNICATION_FREQUENCIES.map((freq) => (
+                    {COMMUNICATION_FREQUENCIES.map((freq, index) => (
                       <button
                         type="button"
                         key={freq}
@@ -672,19 +668,19 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
                             : 'bg-white/[0.02] border-white/5 text-slate-400 hover:border-white/20 hover:text-white'
                         }`}
                       >
-                        {freq}
+                        <span className="choice-number">0{index + 1}</span><span>{freq}</span>
                       </button>
                     ))}
                   </div>
                 </div>
 
                 {/* Question 4: Ideal Date */}
-                <div className="space-y-2">
+                <div className="compatibility-options space-y-2">
                   <label className="text-xs font-bold text-slate-200">
                     "What's your ideal date?" *
                   </label>
                   <div className="space-y-2">
-                    {IDEAL_DATES.map((dateOption) => (
+                    {IDEAL_DATES.map((dateOption, index) => (
                       <button
                         type="button"
                         key={dateOption}
@@ -695,14 +691,14 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
                             : 'bg-white/[0.02] border-white/5 text-slate-400 hover:border-white/20 hover:text-white'
                         }`}
                       >
-                        {dateOption}
+                        <span className="choice-number">0{index + 1}</span><span>{dateOption}</span>
                       </button>
                     ))}
                   </div>
                 </div>
 
                 {/* Question 5: Interactive 1-10 Jealousy Slider */}
-                <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-3">
+                <div className="compatibility-scale p-5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-3">
                   <div className="flex items-center justify-between">
                     <div>
                       <label className="text-xs font-bold text-slate-200">

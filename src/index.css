@@ -63,6 +63,21 @@ button { cursor: pointer; }
 .personality-traits > div:first-child > span { color:#a83328!important; font-family:'DM Mono',monospace; }
 .personality-communication { border-top:1px solid #d5cec0; margin-top:20px!important; }.personality-communication input { border:0!important; border-bottom:1px solid #171716!important; padding:14px 0!important; }
 @media (max-width:640px) { .personality-step-intro h3 { font-size:32px!important; }.personality-love > div,.personality-traits > div:last-of-type { grid-template-columns:1fr!important; }.personality-love button:nth-child(odd),.personality-traits button:nth-child(odd) { border-right:0!important; padding-right:0!important; }.personality-love button:nth-child(even),.personality-traits button:nth-child(even) { padding-left:0!important; } }
+.compatibility-step { padding-top:8px; }
+.compatibility-step-intro { padding-bottom:28px!important; border-color:#d5cec0!important; }
+.compatibility-step-intro h3 { margin-top:12px; font-family:'Playfair Display',Georgia,serif; font-size:38px!important; font-weight:500!important; letter-spacing:-.04em; }
+.compatibility-step-intro p { margin-top:7px; font-size:14px!important; }
+.compatibility-options { padding-top:16px; }
+.compatibility-options > label { display:block; margin-bottom:14px; color:#171716!important; font-size:15px!important; font-weight:600!important; }
+.compatibility-options > div { display:grid!important; grid-template-columns:1fr!important; gap:0!important; border-top:1px solid #d5cec0; }
+.compatibility-options button { display:grid!important; grid-template-columns:48px 1fr; align-items:center; min-height:58px; padding:12px 0!important; border:0!important; border-bottom:1px solid #d5cec0!important; border-radius:0!important; background:transparent!important; color:#403d37!important; font-size:14px!important; box-shadow:none!important; }
+.compatibility-options button:hover { transform:none!important; background:rgba(181,60,46,.05)!important; color:#171716!important; }
+.compatibility-options button.bg-rose-500\/15,.compatibility-options button.bg-amber-500\/15,.compatibility-options button.bg-indigo-500\/15,.compatibility-options button.bg-pink-500\/15 { background:rgba(181,60,46,.09)!important; color:#171716!important; }
+.compatibility-scale { margin-top:28px!important; padding:24px 0!important; border:0!important; border-top:1px solid #d5cec0!important; border-bottom:1px solid #d5cec0!important; background:transparent!important; border-radius:0!important; }
+.compatibility-scale > div:first-child > span { border:0!important; border-radius:0!important; background:transparent!important; color:#a83328!important; font-family:'Playfair Display',Georgia,serif; font-weight:500!important; }
+.compatibility-scale input[type="range"] { accent-color:#a83328; height:2px!important; border-radius:0!important; }
+.compatibility-scale > div:last-child { padding:10px 0!important; border:0!important; border-top:1px solid #d5cec0!important; background:transparent!important; border-radius:0!important; color:#625d54!important; }
+@media (max-width:640px) { .compatibility-step-intro h3 { font-size:32px!important; }.compatibility-options button { grid-template-columns:38px 1fr; } }
 .application-receipt { max-width:860px!important; padding-top:96px!important; padding-bottom:96px!important; }
 .receipt-processing,.receipt-confirmation { border:1px solid #d5cec0!important; background:transparent!important; border-radius:0!important; box-shadow:none!important; }
 .receipt-processing > .relative { display:none!important; }
