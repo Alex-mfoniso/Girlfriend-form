@@ -51,7 +51,7 @@ button { cursor: pointer; }
 .application-sheet button[type="submit"] { background:#171716!important; border-radius:0!important; padding:14px 22px!important; box-shadow:none!important; }
 .application-sheet button[type="submit"]:hover { background:#b53c2e!important; }
 .form-continue { min-height:48px; border:1px solid #171716!important; border-radius:0!important; background:#171716!important; color:#f5f1e8!important; box-shadow:none!important; transition:transform .18s ease!important; }
-.form-continue * { color:#f5f1e8!important; }.public-shell .form-continue:hover { transform:translateX(3px)!important; background:#171716!important; border-color:#171716!important; color:#f5f1e8!important; }
+.form-continue * { color:#f5f1e8!important; }.public-shell .form-continue:hover { transform:none!important; background:#171716!important; border-color:#171716!important; color:#f5f1e8!important; }
 .form-back { border:1px solid #bfb6a6!important; border-radius:0!important; background:transparent!important; color:#403d37!important; }.form-back:hover { transform:none!important; background:#eee8dc!important; color:#171716!important; }
 .personality-step { padding-top:8px; }
 .personality-step-intro { padding:0 0 28px!important; border-color:#d5cec0!important; }
