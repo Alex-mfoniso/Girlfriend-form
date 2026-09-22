@@ -595,7 +595,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
-                className="space-y-6"
+                className="compatibility-step space-y-6"
               >
                 <div className="compatibility-step-intro border-b border-white/10 pb-3">
                   <span className="text-rose-400 font-mono text-sm">03 / 05 · COMPATIBILITY</span>
@@ -853,20 +853,16 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
-                className="space-y-6"
+                className="review-step space-y-6"
               >
-                <div className="border-b border-white/10 pb-3">
-                  <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                    <span className="text-rose-400 font-mono text-sm">05.</span>
-                    Pre-Submission Dossier Review
-                  </h3>
-                  <p className="text-xs text-slate-400">
-                    Verify all candidate data before broadcasting to Cloud Firestore.
-                  </p>
+                <div className="review-step-intro border-b border-white/10 pb-3">
+                  <span className="text-rose-400 font-mono text-sm">05 / 05 · REVIEW</span>
+                  <h3 className="text-lg font-bold text-white">One last look.</h3>
+                  <p className="text-xs text-slate-400">Your application is ready to be placed under review.</p>
                 </div>
 
                 {/* Playful Compatibility Score Card */}
-                <div className="p-6 rounded-2xl bg-gradient-to-br from-rose-950/40 via-purple-950/20 to-slate-900 border border-rose-500/25 space-y-4">
+                <div className="review-score p-6 rounded-2xl bg-gradient-to-br from-rose-950/40 via-purple-950/20 to-slate-900 border border-rose-500/25 space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
                       <span className="text-[11px] font-bold uppercase tracking-wider text-rose-300">
@@ -910,8 +906,8 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
                 </div>
 
                 {/* Summary Recap Box */}
-                <div className="rounded-2xl bg-white/[0.02] border border-white/10 p-5 space-y-4 text-xs">
-                  <h4 className="font-bold text-white text-sm">Candidate Summary</h4>
+                <div className="review-summary rounded-2xl bg-white/[0.02] border border-white/10 p-5 space-y-4 text-xs">
+                  <h4 className="font-bold text-white text-sm">Candidate dossier</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-300">
                     <div>
                       <span className="text-slate-500 block">Applicant Name:</span>
@@ -947,7 +943,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
                 </div>
 
                 {/* Candidate declaration & terms checkbox */}
-                <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 flex items-start gap-3">
+                <div className="review-declaration p-4 rounded-xl bg-white/[0.03] border border-white/10 flex items-start gap-3">
                   <input
                     type="checkbox"
                     id="terms-checkbox"
@@ -991,7 +987,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
               <button
                 type="submit"
                 disabled={isSubmitting || !agreedToTerms}
-                className="inline-flex items-center gap-2 px-7 py-3 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-rose-600 via-pink-600 to-amber-500 hover:from-rose-500 hover:to-pink-500 shadow-xl shadow-rose-600/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.02] active:scale-[0.98]"
+                className="form-submit inline-flex items-center gap-2 px-7 py-3 text-sm font-bold text-white disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>

@@ -86,6 +86,23 @@ button { cursor: pointer; }
 .compatibility-scale input[type="range"] { accent-color:#a83328; height:2px!important; border-radius:0!important; }
 .compatibility-scale > div:last-child { padding:10px 0!important; border:0!important; border-top:1px solid #d5cec0!important; background:transparent!important; border-radius:0!important; color:#625d54!important; }
 @media (max-width:640px) { .compatibility-step-intro h3 { font-size:32px!important; }.compatibility-options button { grid-template-columns:38px 1fr; } }
+.review-step { padding-top:8px; }
+.review-step-intro { padding-bottom:28px!important; border-color:#d5cec0!important; }
+.review-step-intro h3 { margin-top:12px; font-family:'Playfair Display',Georgia,serif; font-size:40px!important; font-weight:500!important; letter-spacing:-.04em; }
+.review-step-intro p { margin-top:7px; font-size:14px!important; }
+.review-score { display:grid; grid-template-columns:minmax(0,1fr) 150px; gap:24px; padding:26px 0!important; border:0!important; border-top:1px solid #171716!important; border-bottom:1px solid #171716!important; border-radius:0!important; background:transparent!important; }
+.review-score > div:first-child { grid-column:1 / -1; display:contents!important; }.review-score > div:first-child > div:first-child { grid-column:1; }.review-score > div:first-child > div:last-child { grid-column:2; grid-row:1; text-align:right!important; }
+.review-score .text-4xl { font-family:'Playfair Display',Georgia,serif; font-size:68px!important; font-weight:500!important; line-height:.9!important; color:#171716!important; }
+.review-score > div:nth-child(2) { grid-column:1 / -1; height:2px!important; padding:0!important; border:0!important; border-radius:0!important; background:#d5cec0!important; }.review-score > div:nth-child(2) > div { border-radius:0!important; background:#b53c2e!important; }
+.review-score > div:last-child { grid-column:1 / -1; padding:14px 0 0!important; border:0!important; border-top:1px solid #d5cec0!important; border-radius:0!important; background:transparent!important; }
+.review-score > div:last-child > div span:first-child { padding:0!important; border:0!important; border-radius:0!important; background:transparent!important; color:#a83328!important; }
+.review-summary { padding:0!important; border:0!important; border-top:1px solid #d5cec0!important; border-bottom:1px solid #d5cec0!important; border-radius:0!important; background:transparent!important; }
+.review-summary h4 { padding:16px 0; margin:0!important; font-family:'DM Mono',monospace; font-size:10px!important; letter-spacing:.12em; text-transform:uppercase; }
+.review-summary > div { gap:0!important; border-top:1px solid #d5cec0; }.review-summary > div > div { padding:14px 0!important; border-bottom:1px solid #d5cec0; }.review-summary > div > div:nth-child(odd) { padding-right:18px!important; }.review-summary > div > div:nth-child(even) { padding-left:18px!important; border-left:1px solid #d5cec0; }
+.review-summary .rounded { border-radius:0!important; background:transparent!important; border:0!important; padding:0!important; }
+.review-declaration { padding:18px 0!important; border:0!important; border-bottom:1px solid #d5cec0!important; border-radius:0!important; background:transparent!important; }
+.form-submit { min-height:48px; border:1px solid #171716!important; border-radius:0!important; background:#171716!important; color:#f5f1e8!important; box-shadow:none!important; transition:transform .18s ease!important; }.form-submit * { color:#f5f1e8!important; }.form-submit:hover { transform:translateX(3px); background:#171716!important; }
+@media (max-width:640px) { .review-step-intro h3 { font-size:32px!important; }.review-score { grid-template-columns:1fr 88px; }.review-score .text-4xl { font-size:52px!important; }.review-summary > div > div:nth-child(odd),.review-summary > div > div:nth-child(even) { padding-left:0!important; padding-right:0!important; border-left:0!important; } }
 .application-receipt { max-width:860px!important; padding-top:96px!important; padding-bottom:96px!important; }
 .receipt-processing,.receipt-confirmation { border:1px solid #d5cec0!important; background:transparent!important; border-radius:0!important; box-shadow:none!important; }
 .receipt-processing > .relative { display:none!important; }
