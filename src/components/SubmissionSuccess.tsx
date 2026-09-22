@@ -249,7 +249,7 @@ export const SubmissionSuccess: React.FC<SubmissionSuccessProps> = ({
             {onGoToAdmin && (
               <button
                 onClick={onGoToAdmin}
-                className="w-full sm:w-1/2 py-3 px-4 rounded-xl font-semibold text-sm text-rose-200 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 transition-colors flex items-center justify-center gap-2"
+                className="receipt-admin-link w-full sm:w-1/2 py-3 px-4 font-semibold text-sm flex items-center justify-center gap-2"
               >
                 <ShieldCheck className="w-4 h-4 text-rose-400" />
                 <span>Alexander's Review CMS</span>
