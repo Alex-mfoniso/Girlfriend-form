@@ -25,6 +25,11 @@ button { cursor: pointer; }
 .application-cta { transition: transform .22s ease, background-color .22s ease !important; }
 .application-cta:hover { background: #171716 !important; transform: translateY(-2px); }
 .application-cta:active { transform: translateY(0); }
+.public-shell .application-cta,.public-shell .application-cta *, .public-shell .nav-apply,.public-shell .nav-apply * { color:#f5f1e8!important; }
+.application-cta { min-height:46px; border:1px solid #171716; border-radius:0!important; background:#171716!important; letter-spacing:.01em; }
+.application-cta:hover { background:#171716!important; border-color:#171716!important; transform:translateY(-1px); }
+.nav-apply { border:1px solid #171716!important; border-radius:0!important; background:#171716!important; box-shadow:none!important; transition:background-color .2s ease, color .2s ease!important; }
+.nav-apply:hover { background:#f5f1e8!important; color:#171716!important; }.nav-apply:hover * { color:#171716!important; }
 @keyframes editorial-reveal { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 .public-shell #position-details > div > div:first-child > * { animation: editorial-reveal .65s cubic-bezier(.22,1,.36,1) both; }
 .public-shell #position-details p { animation-delay: .08s !important; }
@@ -45,6 +50,9 @@ button { cursor: pointer; }
 .application-sheet textarea,.application-sheet input[type="text"] { font-size:16px!important; padding:14px 0!important; }
 .application-sheet button[type="submit"] { background:#171716!important; border-radius:0!important; padding:14px 22px!important; box-shadow:none!important; }
 .application-sheet button[type="submit"]:hover { background:#b53c2e!important; }
+.form-continue { min-height:48px; border:1px solid #171716!important; border-radius:0!important; background:#171716!important; color:#f5f1e8!important; box-shadow:none!important; transition:transform .18s ease!important; }
+.form-continue * { color:#f5f1e8!important; }.form-continue:hover { transform:translateX(3px)!important; background:#171716!important; color:#f5f1e8!important; }
+.form-back { border:1px solid #bfb6a6!important; border-radius:0!important; background:transparent!important; color:#403d37!important; }.form-back:hover { transform:none!important; background:#eee8dc!important; color:#171716!important; }
 .personality-step { padding-top:8px; }
 .personality-step-intro { padding:0 0 28px!important; border-color:#d5cec0!important; }
 .personality-step-intro h3 { margin-top:12px; font-family:'Playfair Display',Georgia,serif; font-size:38px!important; font-weight:500!important; letter-spacing:-.04em; }

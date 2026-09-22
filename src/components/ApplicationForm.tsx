@@ -969,7 +969,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
               <button
                 type="button"
                 onClick={handleBack}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all"
+                className="form-back inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Previous Step</span>
@@ -982,7 +982,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
               <button
                 type="button"
                 onClick={handleNext}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-rose-600 via-rose-500 to-pink-500 hover:from-rose-500 hover:to-pink-400 shadow-md shadow-rose-600/20 transition-all"
+                className="form-continue inline-flex items-center gap-2 px-6 py-2.5 text-sm font-bold"
               >
                 <span>Continue to Step 0{currentStep + 1}</span>
                 <ArrowRight className="w-4 h-4" />

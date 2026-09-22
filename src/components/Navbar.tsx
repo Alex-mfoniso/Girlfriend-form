@@ -67,7 +67,7 @@ export const Navbar: React.FC = () => {
           {/* Apply CTA */}
           <button
             onClick={() => scrollToSection('application-form')}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-rose-600 via-rose-500 to-pink-500 hover:from-rose-500 hover:to-pink-400 shadow-md shadow-rose-600/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
+            className="nav-apply inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white"
           >
             <Sparkles className="w-4 h-4" />
             <span>Apply Now</span>
