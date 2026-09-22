@@ -4,6 +4,7 @@ import { RequirementsSection } from '../components/RequirementsSection';
 import { ApplicationForm } from '../components/ApplicationForm';
 import { SubmissionSuccess } from '../components/SubmissionSuccess';
 import type { GirlfriendApplication } from '../types/application';
+import { Heart } from 'lucide-react';
 
 export const LandingPage: React.FC = () => {
   const [submittedApplication, setSubmittedApplication] = useState<GirlfriendApplication | null>(null);
