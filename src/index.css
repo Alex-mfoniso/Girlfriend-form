@@ -30,6 +30,7 @@ button { cursor: pointer; }
 .application-cta:hover { background:#171716!important; border-color:#171716!important; transform:translateY(-1px); }
 .nav-apply { border:1px solid #171716!important; border-radius:0!important; background:#171716!important; box-shadow:none!important; transition:background-color .2s ease, color .2s ease!important; }
 .nav-apply:hover { background:#f5f1e8!important; color:#171716!important; }.nav-apply:hover * { color:#171716!important; }
+.nav-menu-toggle { width:42px; height:42px; border:1px solid #171716!important; border-radius:0!important; background:transparent!important; color:#171716!important; transition:none!important; }.nav-menu-toggle svg { width:18px; height:18px; stroke-width:1.5; }.mobile-nav-panel { background:#f5f1e8!important; border-color:#d5cec0!important; }.mobile-nav-panel > button { border-bottom:1px solid #d5cec0; padding:14px 0!important; color:#171716!important; }.mobile-nav-panel > div { border:0!important; padding-top:18px!important; }
 @keyframes editorial-reveal { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 .public-shell #position-details > div > div:first-child > * { animation: editorial-reveal .65s cubic-bezier(.22,1,.36,1) both; }
 .public-shell #position-details p { animation-delay: .08s !important; }

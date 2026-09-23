@@ -84,7 +84,7 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center gap-3 md:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg bg-white/5 border border-white/10 text-slate-300"
+            className="nav-menu-toggle p-2 text-slate-300"
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -94,7 +94,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-white/10 bg-[#0c1220] px-4 pt-3 pb-5 space-y-3 animate-in fade-in slide-in-from-top-3">
+        <div className="mobile-nav-panel md:hidden border-b border-white/10 px-5 py-5 space-y-1">
           <button
             onClick={() => scrollToSection('position-details')}
             className="block w-full text-left py-2 text-sm font-medium text-slate-300 hover:text-white"
@@ -122,7 +122,7 @@ export const Navbar: React.FC = () => {
           <div className="pt-2 border-t border-white/10 flex flex-col gap-2">
             <button
               onClick={() => scrollToSection('application-form')}
-              className="w-full py-2.5 rounded-xl text-center text-sm font-semibold text-white bg-gradient-to-r from-rose-600 to-pink-500"
+              className="nav-apply w-full py-3 text-center text-sm font-semibold text-white"
             >
               Apply for Girlfriend Position
             </button>
