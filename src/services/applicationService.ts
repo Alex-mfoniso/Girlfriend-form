@@ -5,7 +5,6 @@ import {
   updateDoc,
   deleteDoc,
   onSnapshot,
-  getDoc,
   query,
   orderBy,
   serverTimestamp,
@@ -37,7 +36,6 @@ export async function submitApplication(
 ): Promise<{ id: string; application: GirlfriendApplication }> {
   const applicationId = generateApplicationId(formData.fullName);
   const docRef = doc(db, APPLICATIONS_COLLECTION, uid);
-  if ((await getDoc(docRef)).exists()) throw new Error('An application already exists for this account.');
 
   const newApplication: GirlfriendApplication = {
     id: applicationId,
