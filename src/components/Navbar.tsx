@@ -63,6 +63,12 @@ export const Navbar: React.FC = () => {
           >
             Perks & Benefits
           </button>
+          <button
+            onClick={() => navigate('login')}
+            className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
+          >
+            Log in
+          </button>
 
           {/* Apply CTA */}
           <button
@@ -106,6 +112,12 @@ export const Navbar: React.FC = () => {
             className="block w-full text-left py-2 text-sm font-medium text-slate-300 hover:text-white"
           >
             Perks & Benefits
+          </button>
+          <button
+            onClick={() => { setMobileMenuOpen(false); navigate('login'); }}
+            className="block w-full text-left py-2 text-sm font-medium text-slate-300 hover:text-white"
+          >
+            Log in
           </button>
           <div className="pt-2 border-t border-white/10 flex flex-col gap-2">
             <button
