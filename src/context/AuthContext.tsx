@@ -3,6 +3,13 @@ import type { User } from 'firebase/auth';
 import { onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { auth, DEFAULT_ADMIN_EMAIL } from '../lib/firebase';
 
+const isAuthorizedAdmin = (user: User | null, adminClaim: boolean): boolean => {
+  const email = user?.email?.toLowerCase().trim();
+  const configuredEmail = DEFAULT_ADMIN_EMAIL.toLowerCase().trim();
+
+  return Boolean(adminClaim || (email && configuredEmail && email === configuredEmail));
+};
+
 type AuthContextValue = {
   user: User | null;
   loading: boolean;
@@ -22,13 +29,21 @@ export const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
   useEffect(() => {
     return onAuthStateChanged(auth, async (nextUser) => {
       setUser(nextUser);
-      if (nextUser) {
-        const token = await nextUser.getIdTokenResult();
-        setIsAdmin(token.claims.admin === true);
-      } else {
+
+      if (!nextUser) {
         setIsAdmin(false);
+        setLoading(false);
+        return;
       }
-      setLoading(false);
+
+      try {
+        const token = await nextUser.getIdTokenResult();
+        setIsAdmin(isAuthorizedAdmin(nextUser, token.claims.admin === true));
+      } catch {
+        setIsAdmin(isAuthorizedAdmin(nextUser, false));
+      } finally {
+        setLoading(false);
+      }
     });
   }, []);
 
@@ -37,9 +52,15 @@ export const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
     loading,
     isAdmin,
     signInWithPassword: async (password) => {
+      if (!DEFAULT_ADMIN_EMAIL) {
+        throw new Error('Admin email is not configured. Set VITE_ADMIN_EMAIL in Vercel.');
+      }
       await signInWithEmailAndPassword(auth, DEFAULT_ADMIN_EMAIL, password);
     },
     sendAdminPasswordReset: async () => {
+      if (!DEFAULT_ADMIN_EMAIL) {
+        throw new Error('Admin email is not configured. Set VITE_ADMIN_EMAIL in Vercel.');
+      }
       await sendPasswordResetEmail(auth, DEFAULT_ADMIN_EMAIL);
     },
     logout: async () => {
