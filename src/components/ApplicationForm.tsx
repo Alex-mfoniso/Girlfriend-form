@@ -21,6 +21,8 @@ import type { ApplicationFormData, GirlfriendApplication } from '../types/applic
 import { calculateCompatibilityScore } from '../utils/compatibility';
 import { submitApplication } from '../services/applicationService';
 import { useToast } from './Toast';
+import { auth } from '../lib/firebase';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 interface ApplicationFormProps {
   onSubmitted: (application: GirlfriendApplication) => void;
@@ -98,8 +100,8 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
     preferredName: '',
     age: '',
     location: '',
+    email: '',
     instagram: '',
-    phone: '',
     personality: PERSONALITY_TYPES[0],
     communicationStyle: 'Direct & straightforward with high meme fluency',
     loveLanguage: LOVE_LANGUAGES[0],
@@ -117,6 +119,8 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
   });
 
   const [agreedToTerms, setAgreedToTerms] = useState<boolean>(false);
+  const [accountPassword, setAccountPassword] = useState('');
+  const [accountMode, setAccountMode] = useState<'create' | 'login'>('create');
 
   // Jealousy slider witty descriptions
   const getJealousyDescription = (val: number) => {
@@ -166,6 +170,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
         errors.age = 'Must be an adult age (18+)';
       }
       if (!formData.location.trim()) errors.location = 'Location is required';
+      if (!formData.email.trim() || !/^\S+@\S+\.\S+$/.test(formData.email)) errors.email = 'A valid email address is required';
     } else if (step === 2) {
       if (!formData.personality) errors.personality = 'Please select your personality profile';
       if (!formData.loveLanguage) errors.loveLanguage = 'Please select a primary love language';
@@ -239,8 +244,15 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
 
     setIsSubmitting(true);
     try {
+      let user = auth.currentUser;
+      if (!user) {
+        if (!accountPassword || accountPassword.length < 6) throw new Error('Create a password with at least 6 characters to secure your application.');
+        if (accountMode === 'create') user = (await createUserWithEmailAndPassword(auth, formData.email.trim(), accountPassword)).user;
+        else user = (await signInWithEmailAndPassword(auth, formData.email.trim(), accountPassword)).user;
+      }
+      if (user.email?.toLowerCase() !== formData.email.trim().toLowerCase()) throw new Error('Please sign in with the email address used for this application.');
       const compatibility = calculateCompatibilityScore(formData);
-      const { application } = await submitApplication(formData, compatibility.score);
+      const { application } = await submitApplication(formData, compatibility.score, user.uid);
       showToast({
         title: 'Application Dispatched',
         message: `Transmission successful. Application ID: ${application.id}`,
@@ -457,17 +469,18 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
                     </div>
                   </div>
 
-                  {/* Phone number (Optional) */}
+                  {/* Required applicant email */}
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                      <Phone className="w-3.5 h-3.5 text-emerald-400" />
-                      <span>Phone / WhatsApp (Optional)</span>
+                    <label className="text-xs font-semibold text-slate-300 flex items-center justify-between">
+                      <span>Email address *</span>
+                      {formErrors.email && <span className="text-rose-400 text-[11px]">{formErrors.email}</span>}
                     </label>
                     <input
-                      type="tel"
-                      placeholder="+1 (555) 000-0000"
-                      value={formData.phone}
-                      onChange={(e) => updateField('phone', e.target.value)}
+                      type="email"
+                      autoComplete="email"
+                      placeholder="you@example.com"
+                      value={formData.email}
+                      onChange={(e) => updateField('email', e.target.value)}
                       className="w-full px-4 py-2.5 rounded-xl glass-input text-sm"
                     />
                   </div>
@@ -954,6 +967,11 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmitted })
                   <label htmlFor="terms-checkbox" className="text-xs text-slate-300 leading-relaxed cursor-pointer">
                     I acknowledge that submitting this application enters me into the candidate pool for Alexander's Girlfriend and that food on Alexander's plate may be subjected to mutual taxation. I confirm all responses represent my genuine authentic self.
                   </label>
+                </div>
+                <div className="review-declaration p-4 rounded-xl bg-white/[0.03] border border-white/10 space-y-3">
+                  <div className="flex items-center justify-between gap-3"><label className="text-xs font-semibold text-slate-300">Secure your application</label><button type="button" onClick={() => setAccountMode(accountMode === 'create' ? 'login' : 'create')} className="text-xs text-rose-400 underline">{accountMode === 'create' ? 'I already have an account' : 'Create an account'}</button></div>
+                  <p className="text-xs text-slate-400">{accountMode === 'create' ? 'Create a password to track this application later.' : 'Sign in to submit under your existing applicant account.'}</p>
+                  <input type="password" minLength={6} autoComplete={accountMode === 'create' ? 'new-password' : 'current-password'} value={accountPassword} onChange={(e) => setAccountPassword(e.target.value)} placeholder="Password (minimum 6 characters)" className="w-full px-4 py-2.5 rounded-xl glass-input text-sm" required />
                 </div>
               </motion.div>
             )}

@@ -14,8 +14,8 @@ export interface ApplicationFormData {
   preferredName: string;
   age: number | string;
   location: string;
+  email: string;
   instagram?: string;
-  phone?: string;
 
   // Step 2: Personality
   personality: string;
@@ -44,8 +44,9 @@ export interface GirlfriendApplication {
   preferredName: string;
   age: number;
   location: string;
+  email: string;
+  uid: string;
   instagram?: string;
-  phone?: string;
   personality: string;
   communicationStyle: string;
   loveLanguage: string;
@@ -63,6 +64,7 @@ export interface GirlfriendApplication {
   status: ApplicationStatus;
   currentStage: ApplicationStage;
   adminNotes?: string;
+  adminMessage?: string;
   createdAt: any;
   updatedAt: any;
 }

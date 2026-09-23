@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-type Route = 'home' | 'apply' | 'admin';
+type Route = 'home' | 'apply' | 'admin' | 'login' | 'my_application';
 
 interface NavigationContextType {
   currentRoute: Route;
@@ -18,6 +18,8 @@ export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     if (path.includes('/admin') || hash === '#admin') {
       return 'admin';
     }
+    if (path.includes('/my-application')) return 'my_application';
+    if (path.includes('/login')) return 'login';
     if (path.includes('/apply') || hash === '#apply') {
       return 'apply';
     }
@@ -44,6 +46,8 @@ export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     setCurrentRoute(route);
     let targetPath = '/';
     if (route === 'admin') targetPath = '/admin';
+    else if (route === 'login') targetPath = '/login';
+    else if (route === 'my_application') targetPath = '/my-application';
     else if (route === 'apply') targetPath = '/#apply';
 
     try {

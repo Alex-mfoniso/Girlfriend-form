@@ -10,11 +10,14 @@ service cloud.firestore {
     // Applications collection
     match /applications/{applicationId} {
       // Anyone (public candidates) can submit a new application
-      allow create: if request.resource.data.fullName is string
+      allow create: if request.auth != null
+                    && request.auth.uid == request.resource.data.uid
+                    && request.resource.data.email == request.auth.token.email
+                    && request.resource.data.fullName is string
                     && request.resource.data.fullName.size() > 0;
 
       // Only the authorized administrator can read applications (list and get individual)
-      allow read: if isAdmin();
+      allow read: if isAdmin() || (request.auth != null && resource.data.uid == request.auth.uid);
 
       // Only the authorized administrator can update status, stage, or notes
       allow update: if isAdmin();

@@ -5,6 +5,7 @@ import {
   updateDoc,
   deleteDoc,
   onSnapshot,
+  getDoc,
   query,
   orderBy,
   serverTimestamp,
@@ -31,11 +32,12 @@ export function generateApplicationId(name: string): string {
 
 export async function submitApplication(
   formData: ApplicationFormData,
-  compatibilityScore: number
+  compatibilityScore: number,
+  uid: string
 ): Promise<{ id: string; application: GirlfriendApplication }> {
   const applicationId = generateApplicationId(formData.fullName);
-  const applicationsRef = collection(db, APPLICATIONS_COLLECTION);
-  const docRef = doc(applicationsRef, applicationId);
+  const docRef = doc(db, APPLICATIONS_COLLECTION, uid);
+  if ((await getDoc(docRef)).exists()) throw new Error('An application already exists for this account.');
 
   const newApplication: GirlfriendApplication = {
     id: applicationId,
@@ -43,8 +45,9 @@ export async function submitApplication(
     preferredName: formData.preferredName?.trim() || formData.fullName.trim().split(' ')[0],
     age: Number(formData.age) || 24,
     location: formData.location.trim(),
+    email: formData.email.trim().toLowerCase(),
+    uid,
     instagram: formData.instagram?.trim() || '',
-    phone: formData.phone?.trim() || '',
     personality: formData.personality,
     communicationStyle: formData.communicationStyle,
     loveLanguage: formData.loveLanguage,
@@ -68,6 +71,10 @@ export async function submitApplication(
   await setDoc(docRef, newApplication);
 
   return { id: applicationId, application: newApplication };
+}
+
+export function subscribeToApplicantApplication(uid: string, onData: (application: GirlfriendApplication | null) => void, onError: (error: Error) => void): Unsubscribe {
+  return onSnapshot(doc(db, APPLICATIONS_COLLECTION, uid), (snapshot) => onData(snapshot.exists() ? ({ ...(snapshot.data() as GirlfriendApplication), id: snapshot.data().id } as GirlfriendApplication) : null), onError);
 }
 
 export function subscribeToApplications(
@@ -103,7 +110,8 @@ export async function updateApplicationStatusAndStage(
   id: string,
   status: ApplicationStatus,
   currentStage: ApplicationStage,
-  adminNotes?: string
+  adminNotes?: string,
+  adminMessage?: string
 ): Promise<void> {
   const docRef = doc(db, APPLICATIONS_COLLECTION, id);
   const updateData: Record<string, any> = {
@@ -114,6 +122,7 @@ export async function updateApplicationStatusAndStage(
   if (adminNotes !== undefined) {
     updateData.adminNotes = adminNotes;
   }
+  if (adminMessage !== undefined) updateData.adminMessage = adminMessage;
   await updateDoc(docRef, updateData);
 }
 

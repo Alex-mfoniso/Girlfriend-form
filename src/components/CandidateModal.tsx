@@ -50,6 +50,7 @@ export const CandidateModal: React.FC<CandidateModalProps> = ({
   const [selectedStatus, setSelectedStatus] = useState<ApplicationStatus>(application.status);
   const [selectedStage, setSelectedStage] = useState<ApplicationStage>(application.currentStage);
   const [adminNotes, setAdminNotes] = useState<string>(application.adminNotes || '');
+  const [adminMessage, setAdminMessage] = useState<string>(application.adminMessage || '');
   const [isSaving, setIsSaving] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [activeTab, setActiveTab] = useState<'profile' | 'interview' | 'assessment'>('profile');
@@ -61,7 +62,8 @@ export const CandidateModal: React.FC<CandidateModalProps> = ({
         application.id,
         selectedStatus,
         selectedStage,
-        adminNotes
+        adminNotes,
+        adminMessage
       );
       showToast({
         title: 'Candidate Status Updated',
@@ -247,6 +249,10 @@ export const CandidateModal: React.FC<CandidateModalProps> = ({
                   <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
                     <span className="text-[11px] text-slate-500 block">Preferred Name</span>
                     <span className="text-white font-medium">{application.preferredName || 'Same'}</span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                    <span className="text-[11px] text-slate-500 block">Email Address</span>
+                    <span className="text-white font-medium">{application.email || 'Not provided'}</span>
                   </div>
                   <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
                     <span className="text-[11px] text-slate-500 block">Age & Location</span>
@@ -476,6 +482,10 @@ export const CandidateModal: React.FC<CandidateModalProps> = ({
                   onChange={(e) => setAdminNotes(e.target.value)}
                   className="w-full p-3 rounded-xl glass-input text-xs"
                 />
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-slate-300 uppercase tracking-wider">Message for applicant</label>
+                <textarea rows={3} placeholder="A status update the applicant can see..." value={adminMessage} onChange={(e) => setAdminMessage(e.target.value)} className="w-full p-3 rounded-xl glass-input text-xs" />
               </div>
             </div>
           )}

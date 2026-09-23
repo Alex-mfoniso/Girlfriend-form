@@ -1,0 +1,11 @@
+import React, { useState } from 'react';
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import { auth } from '../lib/firebase';
+import { useNavigation } from '../context/NavigationContext';
+
+export const ApplicantLoginPage: React.FC = () => {
+  const { navigate } = useNavigation(); const [email,setEmail]=useState(''); const [password,setPassword]=useState(''); const [error,setError]=useState(''); const [loading,setLoading]=useState(false); const [notice,setNotice]=useState('');
+  const login=async(e:React.FormEvent)=>{e.preventDefault();setError('');setLoading(true);try{await signInWithEmailAndPassword(auth,email,password);navigate('my_application')}catch(err:any){setError(err.message||'Unable to sign in.')}finally{setLoading(false)}};
+  const reset=async()=>{if(!email){setError('Enter your email first.');return}try{await sendPasswordResetEmail(auth,email);setNotice('Password reset email sent.')}catch(err:any){setError(err.message||'Unable to send reset email.')}};
+  return <section className="min-h-[75vh] px-5 py-20"><form onSubmit={login} className="mx-auto max-w-md border border-[#d5cec0] p-7 sm:p-10"><p className="font-mono text-[11px] tracking-[.15em] text-[#a83328]">APPLICANT ACCESS</p><h1 className="mt-4 font-editorial text-4xl">Track your application.</h1><p className="mt-3 text-sm text-[#625d54]">Sign in with the account created when you submitted.</p>{error&&<p className="mt-5 text-sm text-[#a83328]">{error}</p>}{notice&&<p className="mt-5 text-sm text-[#42634a]">{notice}</p>}<label className="mt-7 block text-sm">Email address<input className="mt-2 w-full border-b border-[#171716] bg-transparent py-3 outline-none" type="email" value={email} onChange={e=>setEmail(e.target.value)} required/></label><label className="mt-5 block text-sm">Password<input className="mt-2 w-full border-b border-[#171716] bg-transparent py-3 outline-none" type="password" value={password} onChange={e=>setPassword(e.target.value)} required/></label><button className="mt-8 w-full bg-[#171716] py-3 text-sm font-semibold text-[#f5f1e8]" disabled={loading}>{loading?'Signing in…':'Sign In'}</button><button type="button" onClick={reset} className="mt-4 text-sm underline">Forgot password?</button></form></section>;
+};

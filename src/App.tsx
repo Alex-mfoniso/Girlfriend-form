@@ -5,6 +5,8 @@ import { ToastProvider } from './components/Toast';
 import { Navbar } from './components/Navbar';
 import { LandingPage } from './pages/LandingPage';
 import { AdminPage } from './pages/AdminPage';
+import { ApplicantLoginPage } from './pages/ApplicantLoginPage';
+import { ApplicantDashboardPage } from './pages/ApplicantDashboardPage';
 
 const AppContent: React.FC = () => {
   const { currentRoute } = useNavigation();
@@ -13,7 +15,7 @@ const AppContent: React.FC = () => {
     <div className={currentRoute === 'admin' ? 'admin-shell' : 'public-shell'}>
       <Navbar />
       <main id="main-content">
-        {currentRoute === 'admin' ? <AdminPage /> : <LandingPage />}
+        {currentRoute === 'admin' ? <AdminPage /> : currentRoute === 'login' ? <ApplicantLoginPage /> : currentRoute === 'my_application' ? <ApplicantDashboardPage /> : <LandingPage />}
       </main>
     </div>
   );
