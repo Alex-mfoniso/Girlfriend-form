@@ -1,9 +1,7 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import type { User } from 'firebase/auth';
 import { onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { auth } from '../lib/firebase';
-
-const ADMIN_EMAIL = 'alexandermfoniso18@gmail.com';
+import { auth, DEFAULT_ADMIN_EMAIL } from '../lib/firebase';
 
 type AuthContextValue = {
   user: User | null;
@@ -18,11 +16,18 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 export const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    return onAuthStateChanged(auth, (nextUser) => {
+    return onAuthStateChanged(auth, async (nextUser) => {
       setUser(nextUser);
+      if (nextUser) {
+        const token = await nextUser.getIdTokenResult();
+        setIsAdmin(token.claims.admin === true);
+      } else {
+        setIsAdmin(false);
+      }
       setLoading(false);
     });
   }, []);
@@ -30,17 +35,17 @@ export const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
   const value = useMemo<AuthContextValue>(() => ({
     user,
     loading,
-    isAdmin: user?.email?.toLowerCase() === ADMIN_EMAIL,
+    isAdmin,
     signInWithPassword: async (password) => {
-      await signInWithEmailAndPassword(auth, ADMIN_EMAIL, password);
+      await signInWithEmailAndPassword(auth, DEFAULT_ADMIN_EMAIL, password);
     },
     sendAdminPasswordReset: async () => {
-      await sendPasswordResetEmail(auth, ADMIN_EMAIL);
+      await sendPasswordResetEmail(auth, DEFAULT_ADMIN_EMAIL);
     },
     logout: async () => {
       await signOut(auth);
     },
-  }), [loading, user]);
+  }), [isAdmin, loading, user]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
